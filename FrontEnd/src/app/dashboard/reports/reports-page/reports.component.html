@@ -1,0 +1,36 @@
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Time</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Acceleration X</th>
+          <th>Acceleration Y</th>
+          <th>Acceleration Z</th>
+          <th>Gyroscope X</th>
+          <th>Gyroscope Y</th>
+          <th>Gyroscope Z</th>
+          <th>Falling</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>{{ report.ID }}</td>
+          <td>{{ report.Name }}</td>
+          <td>{{ report.time | date: 'medium' }}</td>
+          <td>{{ report.GPS.LAT }}</td>
+          <td>{{ report.GPS.LNG }}</td>
+          <td>{{ report.Acceleration.X }}</td>
+          <td>{{ report.Acceleration.Y }}</td>
+          <td>{{ report.Acceleration.Z }}</td>
+          <td>{{ report.Gyroscope.X }}</td>
+          <td>{{ report.Gyroscope.Y }}</td>
+          <td>{{ report.Gyroscope.Z }}</td>
+          <td>{{ report.falling }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

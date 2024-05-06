@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4" *ngFor="let item of Clinets" >
+            <div class="card card-margin" >
+                <div class="card-body pt-0" >
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-primary">
+                                    <span class="widget-49-date-day">{{item.Day}}</span>
+                                    <span class="widget-49-date-month">{{item.month}}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">{{item.Name}}</span>
+                                    <span class="widget-49-meeting-time">{{item.Hours}}</span>
+                                </div>
+                            </div>
+                            <ul class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span>Long : {{item.LNG}} Lat : {{item.LAT}}</span></li>
+                                <li class="widget-49-meeting-item"><span>Status : {{item.Status}}</span></li>
+                                <li class="widget-49-meeting-item"><span>Client ID : {{item.ID}}</span></li>
+                            </ul>
+                            <ul>
+                                <button class="btn btn-lg btn-primary btn-block" *ngIf="isAdmin" [routerLink]="['../EditClientPage', item.ID]">Edit</button>                               
+                                <button class="btn btn-lg btn-primary btn-block" *ngIf="isAdmin" (click)="deleteClient(item.ID)">Delete</button>                            
+                            </ul>
+                            
+                        </div>
+                    
+                
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

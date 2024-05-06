@@ -1,0 +1,25 @@
+<h2>Clients</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Name</th>
+                <th>Lat;Long</th>
+                <th>Status</th>
+                <th>Fall Detection</th>
+                <th>Go to map</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of Clinets">
+                <td>{{item.ID}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.LAT}};{{item.LNG}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.falling}}</td>
+                <td><a [routerLink]="['/dashboard/map']" [queryParams]="{lat: item.LAT, lng: item.LNG}">Map location</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

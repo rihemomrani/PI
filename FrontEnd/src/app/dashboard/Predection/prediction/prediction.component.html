@@ -1,0 +1,87 @@
+<div class="table-responsive">
+  <h2 class="text-center">Fall Prediction</h2>
+  
+  <div *ngIf="predictionData">
+    <h3>Data Used:</h3>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Latitude (LAT)</td>
+          <td>{{ predictionData.GPS.LAT }}</td>
+        </tr>
+        <tr>
+          <td>Longitude (LNG)</td>
+          <td>{{ predictionData.GPS.LNG }}</td>
+        </tr>
+        <tr>
+          <td>Acceleration X</td>
+          <td>{{ predictionData.Acceleration.X }}</td>
+        </tr>
+        <tr>
+          <td>Acceleration Y</td>
+          <td>{{ predictionData.Acceleration.Y }}</td>
+        </tr>
+        <tr>
+          <td>Acceleration Z</td>
+          <td>{{ predictionData.Acceleration.Z }}</td>
+        </tr>
+        <tr>
+          <td>Gyroscope X</td>
+          <td>{{ predictionData.Gyroscope.X }}</td>
+        </tr>
+        <tr>
+          <td>Gyroscope Y</td>
+          <td>{{ predictionData.Gyroscope.Y }}</td>
+        </tr>
+        <tr>
+          <td>Gyroscope Z</td>
+          <td>{{ predictionData.Gyroscope.Z }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="predictions">
+    <h3>Predictions:</h3>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Algorithm</th>
+          <th>Prediction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>KNN</td>
+          <td>{{ predictions.KNN === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+          <td>Decision Tree</td>
+          <td>{{ predictions['Decision Tree'] === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+          <td>Random Forest</td>
+          <td>{{ predictions['Random Forest'] === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+          <td>SVM</td>
+          <td>{{ predictions.SVM === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+          <td>Neural Network (TF)</td>
+          <td>{{ predictions['Neural Network (TF)'] === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="text-center">
+    <form class="form-signin" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <img class="mb-4" src="/assets/login.png" alt="" width="150" height="150">
+        <input type="number" id="inputID" class="form-control" placeholder="ID" formControlName="ID" autofocus>
+        <input type="text" id="inputName" class="form-control" placeholder="Name" formControlName="Name">
+        <input type="number" id="inputDay" class="form-control" placeholder="Day" formControlName="Day">
+        <input type="text" id="inputMonth" class="form-control" placeholder="Month" formControlName="month">
+        <input type="number" id="inputYear" class="form-control" placeholder="Year" formControlName="year">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Add Client</button>
+    </form>
+</div>

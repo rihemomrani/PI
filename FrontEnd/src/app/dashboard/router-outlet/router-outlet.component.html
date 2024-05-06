@@ -1,0 +1,67 @@
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0">FallDetection App</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" routerLink="/auth">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="./home">
+                            <span data-feather="home"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" routerLinkActive="active" routerLink="./map">
+                            Map
+                        </a>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Saved reports</span>
+                    <a class="d-flex align-items-center text-muted">
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="./reports">
+                            List of reports
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="./reports-page">
+                            Fall reports
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" *ngIf="isAdmin" routerLinkActive="active" routerLink="./AddClientpage">
+                            Add New Client
+                        </a>
+                    </li>
+                </ul> 
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="./prediction">
+                            Predections
+                        </a>
+                    </li>
+                </ul> 
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <router-outlet></router-outlet>
+        </main>
+
+    </div>
+</div>
