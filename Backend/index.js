@@ -155,7 +155,7 @@ app.post('/api/predict-fall', (req, res) => {
 
   // Execute Python script
   const pythonScriptPath = 'predict.py'; // Path to your Python script
-  const pythonProcess = spawn('c:/Users/MSI/OneDrive/Bureau/AzizPI2/fall_detection_project/BACKEND/myenv/Scripts/python.exe', [pythonScriptPath, inputFilePath]);
+  const pythonProcess = spawn('c:/Users/MSI/OneDrive/Bureau/PI/BACKEND/myenv/Scripts/python.exe', [pythonScriptPath, inputFilePath]);
   let scriptOutput = '';
 
   pythonProcess.stdout.on('data', (data) => {
