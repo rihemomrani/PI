@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -247,33 +248,49 @@ app.post('/api/signup', async (req, res) => {
 // POST user login
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
-  if (typeof email !== 'string' || typeof password !== 'string') {
-    return res.status(400).json({ 'message': 'Email and password must be strings' });
-  }
 
   try {
     const user = await User.findOne({ email }).exec();
     if (!user) {
       return res.status(404).json({ 'message': 'User not found' });
     }
-    const hashedPassword = user.password instanceof Buffer ? user.password.toString() : user.password;
 
-    const isMatch = await bcrypt.compare(password, hashedPassword);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      // Include the role in the response; assume user schema has a 'role' field
+      const token = jwt.sign(
+        { userId: user._id, email: user.email, role: user.role },
+        'PI_ESPRIT', // Replace 'your_secret_key' with a real key in your production environment
+        { expiresIn: '1h' } // Token expires in one hour
+      );
+
       res.status(200).json({
-        'message': 'Login successful',
-        'user': {
-          'role': user.role, // Send the user's role
-          'email': user.email
-        }
+        message: 'Login successful',
+        user: { role: user.role, email: user.email },
+        token: token
       });
     } else {
-      res.status(401).json({ 'message': 'Invalid email or password' });
+      res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (e) {
-    res.status(500).json({ 'error': e.message });
+    res.status(500).json({ error: e.message });
   }
+});
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(403).json({ message: 'A token is required for authentication' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, 'PI_ESPRIT');
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).json({ message: 'Invalid Token' });
+  }
+  return next();
+};
+app.get('/api/protected-route', verifyToken, (req, res) => {
+  res.status(200).json({ message: 'This is a protected route' });
 });
 
 app.post('/api/clients', async (req, res) => {

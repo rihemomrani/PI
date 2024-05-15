@@ -27,7 +27,7 @@ def fetch_sensor_data(url):
 
 while True:
     # URL of your ESP32 web server for updated data path
-    url = "http://192.168.1.15/data"
+    url = "http://192.168.137.245/data"
     sensor_data = fetch_sensor_data(url)
     
     if sensor_data and 'lat' in sensor_data and 'lng' in sensor_data:

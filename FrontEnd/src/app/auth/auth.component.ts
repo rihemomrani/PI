@@ -1,8 +1,8 @@
+// AuthComponent
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoginServiceService } from '../Services/login-service.service';
-import { User } from '../classes/user';
 
 @Component({
   selector: 'app-auth',
@@ -10,27 +10,36 @@ import { User } from '../classes/user';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  formLogin = this.formBuilder.group({
-    email:"",
-    password: ""
-  });
+  formLogin: FormGroup;
 
-  constructor(private router: Router,private formBuilder : FormBuilder,private currentService:LoginServiceService) { }
-
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private loginService: LoginServiceService
+  ) {
+    this.formLogin = this.formBuilder.group({
+      email: "",
+      password: ""
+    });
   }
 
-  ToDashboard(){
-    var u= new User(this.formLogin.value.email,this.formLogin.value.password);
-    this.currentService.logging_in(u).subscribe(data=>{
-      console.log(data);
-       this.router.navigate(['dashboard']);
-    },
-      error => {
-        alert("Password or Email is wrong!")
-        console.log(error);});
-  }
+  ngOnInit(): void {}
   SignUp(){
     this.router.navigate(['sign-up']);
+  }
+
+  login() {
+    this.loginService.logging_in(this.formLogin.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error: (error) => {
+        alert("Password or Email is wrong!");
+        console.error(error);
+      }
+    });
   }
 }

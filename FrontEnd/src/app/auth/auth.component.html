@@ -1,5 +1,5 @@
-<div class="text-center">
-    <form class="form-signin" [formGroup]="formLogin" >
+<div class="text-center form-signin form-signup">
+  <form [formGroup]="formLogin" (ngSubmit)="login()">
         <img class="mb-4" src="/assets/login.png" alt="" width="150" height="150">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -8,14 +8,14 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required formControlName="password">
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me"> Remember meaa
+            <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" (click)="ToDashboard()">Sign in</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
         <button class="btn btn-lg btn-primary btn-block" (click)="SignUp()">Sign Up</button>
         <br>
         <a class="nav-link" routerLink="/forget-password" routerLinkActive="active">Forget Password?</a>
-        <p class="mt-5 mb-3 text-muted">&copy; 2024-2024</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
       </form>
 </div>
 

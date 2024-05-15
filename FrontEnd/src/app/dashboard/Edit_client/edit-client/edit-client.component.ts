@@ -14,6 +14,11 @@ export class EditClientComponent implements OnInit {
   constructor(private router: Router,private route: ActivatedRoute, private formBuilder: FormBuilder, private clientService: ClientService) { }
  
   ngOnInit(): void {
+    const role = localStorage.getItem('role');
+    if(role!="admin"){
+      alert("you have no acess to this page");
+      this.router.navigate(['dashboard']);
+    }
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],

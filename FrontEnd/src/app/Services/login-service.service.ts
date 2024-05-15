@@ -20,10 +20,19 @@ export class LoginServiceService {
     return this.httpclient.post<any>(`${this.apiBaseUrl}/login`, User, this.options)
       .pipe(tap(res => {
         console.log(res);
-        if (res && res.user) {
+        if (res && res.token) {
+          localStorage.setItem('token', res.token); // Store the JWT
           localStorage.setItem('role', res.user.role); // Store the user's role
         }
       }));
+  }
+  getHeaders(): HttpHeaders {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', token);
+    }
+    return headers;
   }
 
   // Method to handle user signup
@@ -39,7 +48,8 @@ export class LoginServiceService {
 
   // Method to handle user logout
   logout(): void {
-    localStorage.removeItem('role');   // Remove the stored role
-    // Additional logout actions can be added here, like redirecting the user
+    localStorage.removeItem('token');   // Remove the stored token
+    localStorage.removeItem('role');    // Remove the stored role
+    // Redirect the user to the login page or home
   }
 }

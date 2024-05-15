@@ -22,6 +22,11 @@ export class AddClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const role = localStorage.getItem('role');
+    if(role!="admin"){
+      alert("you have no acess to this page");
+      this.router.navigate(['dashboard']);
+    }
   }
 
 

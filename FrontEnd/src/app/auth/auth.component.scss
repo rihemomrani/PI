@@ -27,3 +27,40 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+
+    .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+
+        &:focus {
+            z-index: 2;
+        }
+    }
+
+    input[type="email"], input[type="password"] {
+        margin-bottom: 10px; // Ensuring consistent margin for all inputs
+    }
+}
+
+.form-signup {
+    // Additional or overriding styles for the signup form
+    max-width: 350px; // Slightly wider if needed
+    padding: 20px; // More padding if form feels cramped
+
+    input[type="password"] {
+        margin-bottom: 15px; // Adjust spacing if needed
+    }
+
+    .form-control {
+        font-size: 14px; // Adjust font size if different from login
+    }
+}
+
